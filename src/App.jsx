@@ -8,7 +8,7 @@ export default function App() {
       </div>
 
       <header className="hero">
-        <h1>NASA HUNCH: Astronaut Health AI</h1>
+        <h1>NASA HUNCH: Polaris</h1>
         <p>
           A revolutionary system for monitoring astronaut health and supporting mental wellness during space missions. Powered by advanced artificial intelligence and designed with human care at its core.
         </p>
@@ -25,10 +25,11 @@ export default function App() {
         <div className="card">
           <h2>How It Works</h2>
           <ul>
-            <li>Wearable sensors continuously collect comprehensive health data</li>
-            <li>Advanced AI analyzes patterns and identifies potential concerns</li>
-            <li>An intelligent assistant provides personalized mental wellness support</li>
-            <li>Critical insights are seamlessly communicated to mission control</li>
+            <li>Health and Sleep Data is gathered by health and diagnostic apps on your mobile device</li>
+            <li>An AI agent analyzes patterns and identifies potential concerns</li>
+            <li>A GPT Agent provides personalized mental wellness support</li>
+            <li>Insights are communicated with Doctor for further analysis and diagnosis</li>
+            <p><em>Doctor-on-demand services are available</em></p>
           </ul>
         </div>
         <div className="card-image">
