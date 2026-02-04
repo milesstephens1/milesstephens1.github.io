@@ -1,4 +1,90 @@
 import "./App.css";
+import { useEffect, useRef, useState } from "react";
+
+function StarBackground() {
+  const canvasRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = 500;
+
+    const stars = Array.from({ length: 200 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      opacity: Math.random() * 0.5 + 0.3,
+      twinkleSpeed: Math.random() * 0.02 + 0.01,
+      vx: (Math.random() - 0.5) * 0.2,
+    }));
+
+    let animationId;
+    let time = 0;
+
+    const animate = () => {
+      time += 1;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Add gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "rgba(10, 25, 50, 0.9)");
+      gradient.addColorStop(1, "rgba(30, 60, 100, 0.6)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw and update stars
+      stars.forEach((star) => {
+        star.x += star.vx;
+        star.opacity =
+          Math.sin(time * star.twinkleSpeed) * 0.3 + star.opacity;
+
+        if (star.x > canvas.width) star.x = 0;
+        if (star.x < 0) star.x = canvas.width;
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="star-background"
+      style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+    />
+  );
+}
 
 export default function App() {
   return (
@@ -8,10 +94,13 @@ export default function App() {
       </div>
 
       <header className="hero">
-        <h1>NASA HUNCH: Polaris</h1>
-        <p>
-          A revolutionary system for monitoring astronaut health and supporting mental wellness during space missions. Powered by advanced artificial intelligence and designed with human care at its core.
-        </p>
+        <StarBackground />
+        <div className="hero-content">
+          <h1>NASA HUNCH: Polaris</h1>
+          <p>
+            A revolutionary system for monitoring astronaut health and supporting mental wellness during space missions. Powered by advanced artificial intelligence and designed with human care at its core.
+          </p>
+        </div>
       </header>
 
       <section className="card">
