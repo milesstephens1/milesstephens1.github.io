@@ -25,7 +25,7 @@ export default function App() {
         <div className="card">
           <h2>How It Works</h2>
           <ul>
-            <li>Health and Sleep Data is gathered by health and diagnostic apps on your mobile device</li>
+            <li>Health and sleep data is gathered by health and diagnostic apps on your mobile device</li>
             <li>An AI agent analyzes patterns and identifies potential concerns</li>
             <li>A GPT Agent provides personalized mental wellness support</li>
             <li>Insights are communicated with Doctor for further analysis and diagnosis</li>
