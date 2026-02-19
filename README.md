@@ -1,6 +1,6 @@
-### INSTRUCTIONS
+## INSTRUCTIONS
 
-## PYTHON SERVER
+### PYTHON SERVER
 
 1. To begin booting up the python server, use 'venv/Scripts/activate'
 
@@ -10,7 +10,7 @@
 
 ---
 
-## BUILD SERVER
+### BUILD SERVER
 
 Run:
 rm -rf dist
